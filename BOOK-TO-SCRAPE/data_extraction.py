@@ -9,6 +9,10 @@ def get_soup(url):
     if response.status_code == 200:
         return BeautifulSoup(response.content, 'html.parser')
 
+
+def product_page_url(soup):
+    return
+
 def get_category(soup):
     try : 
        return soup.find('ul', class_='breadcrumb').find_all('a')[2].text.strip()
@@ -31,7 +35,7 @@ def get_title(soup):
 
 def get_price_including_tax(soup):
     try:
-        price_including_tax = soup.find_all('tr')[3].td.text.strip()[1:] #Enlève le sigle Euros sur le prix
+        price_including_tax = soup.find_all('tr')[3].td.text.strip()[1:] #Enlève le sigle Livre sur le prix
         return float(price_including_tax)
     except Exception:
         return None
@@ -76,7 +80,8 @@ def get_product_description(soup):
         return None 
  
 def get_image_url(soup):
+    base_url = 'https://books.toscrape.com/'
     try :
-        return soup.find('img')['src'].replace('../../', 'https://books.toscrape.com/')
+        return soup.find('img')['src'].replace('../../', base_url)
     except Exception:
         return None
