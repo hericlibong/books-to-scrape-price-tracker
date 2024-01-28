@@ -7,7 +7,7 @@ import requests
 def get_soup(url):
     response = requests.get(url)
     if response.status_code == 200:
-        return BeautifulSoup(response.content, 'lxml')
+        return BeautifulSoup(response.content, 'html.parser')
 
 def get_category(soup):
     try : 
@@ -75,8 +75,8 @@ def get_product_description(soup):
     except Exception:
         return None 
  
-def get_image_url(soup, base_url):
+def get_image_url(soup):
     try :
-        return soup.find('img')['src'].replace('../../', base_url)
+        return soup.find('img')['src'].replace('../../', 'https://books.toscrape.com/')
     except Exception:
         return None

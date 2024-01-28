@@ -2,7 +2,7 @@
 import csv
 import os
 
-def save_to_csv(data, filename='single_book.csv'):
+def save_to_csv(data, filename='cat_books.csv'):
     file_exists = os.path.isfile(filename)
     
     with open(filename, 'a', newline='', encoding='utf-8') as csvfile:
