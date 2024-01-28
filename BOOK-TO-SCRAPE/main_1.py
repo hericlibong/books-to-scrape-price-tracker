@@ -46,6 +46,9 @@ for cat_url in category_urls:
     for book_url in books_urls:
         soup = get_soup(book_url)
 
+        #utilisation de get_category pour obtenir le nom de la catégorie
+        categorie_name = get_category(soup)
+
         data = {
             'product_page_url': book_url,
             'universal_product_code (upc)': get_universal_product_code(soup),
@@ -59,5 +62,5 @@ for cat_url in category_urls:
             'review_rating':get_review_rating(soup),
             'image_url': get_image_url(soup)
         }
-        print(data)
+        save_to_csv(data, categorie_name)
 
